@@ -23,6 +23,7 @@ import socket
 import struct
 import sys
 import time
+from threading import current_thread
 
 
 if sys.platform.startswith("win32"):
@@ -135,7 +136,7 @@ class Ping(object):
 		self.bind = bind
 
 		if own_id is None:
-			self.own_id = os.getpid() & 0xFFFF
+			self.own_id = current_thread().ident & 0xFFFF
 		else:
 			self.own_id = own_id
 
